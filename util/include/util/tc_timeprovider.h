@@ -22,10 +22,13 @@
 #include "util/tc_monitor.h"
 #include "util/tc_thread.h"
 #include "util/tc_autoptr.h"
-
+#if defined(__aarch64__)
+#define rdtsc(var) \
+     asm volatile("mrs %0, CNTVCT_EL0" : "=r"(var))	
+#elif defined(__x86_64__)
 #define rdtsc(low,high) \
      __asm__ __volatile__("rdtsc" : "=a" (low), "=d" (high))
-
+#endif	
 #define TNOW     tars::TC_TimeProvider::getInstance()->getNow()
 #define TNOWMS   tars::TC_TimeProvider::getInstance()->getNowMs()
 
