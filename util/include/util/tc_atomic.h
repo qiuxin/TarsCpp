@@ -137,10 +137,24 @@ public:
      */
     void inc_fast()
     {
+#if defined(__aarch64__)
+        unsigned long tmp;    
+        int result; 
+	int i = 1;
+	asm volatile(                                          
+"       prfm    pstl1strm, %2\n"                               
+"1:     ldxr    %w0, %2\n"                                     
+"       add     %w0, %w0, %w3\n"                               
+"       stxr    %w1, %w0, %2\n"                                
+"       cbnz    %w1, 1b"                                       
+        : "=&r" (result), "=&r" (tmp), "+Q" (_value.counter)   
+        : "Ir" (i));                                           
+#else
         __asm__ __volatile__(
             TARS_LOCK "incl %0"
             :"=m" (_value.counter)
             :"m" (_value.counter));
+#endif
     }
 
     /**
@@ -150,6 +164,20 @@ public:
      */
     bool dec_and_test()
     {
+#if defined(__aarch64__)
+	unsigned long tmp;    
+        int result; 
+	int i = 1;
+	asm volatile(                                          
+"       prfm    pstl1strm, %2\n"                               
+"1:     ldxr    %w0, %2\n"                                     
+"       sub     %w0, %w0, %w3\n"                               
+"       stxr    %w1, %w0, %2\n"                                
+"       cbnz    %w1, 1b"                                       
+        : "=&r" (result), "=&r" (tmp), "+Q" (_value.counter)   
+        : "Ir" (i));                                           
+	return result == 0;
+#else
         unsigned char c;
 
         __asm__ __volatile__(
@@ -158,6 +186,7 @@ public:
             :"m" (_value.counter) : "memory");
 
         return c != 0;
+#endif
     }
 
     /**
@@ -177,13 +206,18 @@ protected:
      */
     int add_and_return(int i)
     {
-        /* Modern 486+ processor */
+#if defined(__aarch64__)
+       	return __atomic_add_fetch(&_value.counter,i,__ATOMIC_ACQ_REL);
+#else      
+    /* Modern 486+ processor */
         int __i = i;
         __asm__ __volatile__(
             TARS_LOCK "xaddl %0, %1;"
             :"=r"(i)
             :"m"(_value.counter), "0"(i));
-        return i + __i;
+     
+  	 return i + __i;
+#endif
     }
 
 protected:
