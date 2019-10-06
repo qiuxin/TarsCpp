@@ -3,7 +3,7 @@
 Note well:  This is Arm verion!
 
 # Modifications
-To make Tars run well on Arm platform,  the following modifications is made:
+To make Tars run well on Arm platform,  the following modifications are made:
 
 ## Update the files itemized blow:
 
