@@ -6,16 +6,26 @@ Note well:  This is Arm verion!
 To make Tars run well on Arm platform,  the following modifications is made:
 
 Update the files itemized blow:
+
 /TarsCpp/util/include/util/tc_atomic.h
+
 /TarsCpp/util/include/util/tc_fcontext.h
+
 /TarsCpp/util/include/util/tc_timeprovider.h
+
 /TarsCpp/util/src/CMakeLists.txt
+
 /TarsCpp/util/src/tc_timeprovider.cpp
 
+
 Add new files itemized blow:
+
 /TarsCpp/util/include/util/tc_fcontext_aarch64.h
+
 /TarsCpp/util/src/tc_jump_aarch64_sysv_elf_gas.s
+
 /TarsCpp/util/src/tc_make_aarch64_sysv_elf_gas.s
+
 
 # Directory |Features
 ------------------|----------------
