@@ -5,7 +5,7 @@ Note well:  This is Arm verion!
 # Modifications
 To make Tars run well on Arm platform,  the following modifications is made:
 
-Update the files itemized blow:
+## Update the files itemized blow:
 
 /TarsCpp/util/include/util/tc_atomic.h
 
@@ -18,7 +18,7 @@ Update the files itemized blow:
 /TarsCpp/util/src/tc_timeprovider.cpp
 
 
-Add new files itemized blow:
+## Add new files itemized blow:
 
 /TarsCpp/util/include/util/tc_fcontext_aarch64.h
 
