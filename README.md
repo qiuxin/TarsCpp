@@ -1,8 +1,23 @@
-[点我查看中文版](README.zh.md)
+# Tars Cpp Arm version 
 
-This project is the source code of the Tars RPC framework C++ language.
+Note well:  This is Arm verion!
 
-Directory |Features
+# Modifications
+To make Tars run well on Arm platform,  the following modifications is made:
+
+Update the files itemized blow:
+/TarsCpp/util/include/util/tc_atomic.h
+/TarsCpp/util/include/util/tc_fcontext.h
+/TarsCpp/util/include/util/tc_timeprovider.h
+/TarsCpp/util/src/CMakeLists.txt
+/TarsCpp/util/src/tc_timeprovider.cpp
+
+Add new files itemized blow:
+/TarsCpp/util/include/util/tc_fcontext_aarch64.h
+/TarsCpp/util/src/tc_jump_aarch64_sysv_elf_gas.s
+/TarsCpp/util/src/tc_make_aarch64_sysv_elf_gas.s
+
+# Directory |Features
 ------------------|----------------
 [servant](https://github.com/TarsCloud/TarsCpp/tree/master/servant)      |Source code implementation of C++ language framework rpc
 [tools](https://github.com/TarsCloud/TarsCpp/tree/master/tools)        |Source code implementation of C++ language framework IDL tool
@@ -13,7 +28,7 @@ Directory |Features
 [docs](https://github.com/TarsCloud/TarsCpp/tree/master/docs)         |Document description
 [docs-en](https://github.com/TarsCloud/TarsCpp/tree/master/docs-en)      |English document description
 
-Dependent environment
+# Dependent environment
 
 Software |version requirements
 ------|--------
@@ -24,7 +39,7 @@ flex tool:      |	2.5 and above
 cmake:       	|   2.8.8 and above
 mysql:          |	4.1.17 and above
 
-Compile and install
+# Compile and install
 ```
 git clone https://github.com/TarsCloud/TarsCpp.git --recursive
 cd TarsCpp
